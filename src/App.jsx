@@ -5,6 +5,7 @@ import AuthModal from './components/AuthModal'
 import PostIdeaModal from './components/PostIdeaModal'
 import UserProfile from './components/UserProfile'
 import AdminDashboard from './components/AdminDashboard'
+import Footer from './components/Footer'
 import { AuthProvider, useAuth } from './contexts/AuthContext'
 import './App.css'
 
@@ -215,6 +216,7 @@ function AppContent() {
 
       {showLogin && <AuthModal onClose={() => setShowLogin(false)} />}
       {showPostIdea && <PostIdeaModal onClose={() => { setShowPostIdea(false); setEditIdeaTemp(null); }} onSubmit={handlePostOrEditIdea} editData={editIdeaTemp} />}
+      <Footer />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Lightbulb, Search, Plus, LogOut, Sun, Moon, ShieldCheck } from 'lucide-react';
+import { Lightbulb, Search, Plus, LogOut, Sun, Moon, ShieldCheck, Linkedin } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import './Navbar.css';
 
@@ -42,6 +42,17 @@ const Navbar = ({ onPostClick, onLoginClick, onSearch, onViewProfile, onAdminCli
               🛡️ Total Users: {useAuth().totalUsers}
             </div>
           )}
+
+          <a 
+            href="https://www.linkedin.com/in/jishivasingh2005" 
+            target="_blank" 
+            rel="noreferrer" 
+            className="btn btn-ghost"
+            title="Connect with Owner"
+            style={{ padding: '0.4rem', color: '#0077b5', marginRight: '0.5rem' }}
+          >
+            <Linkedin size={20} />
+          </a>
           
           {currentUser ? (
             <>

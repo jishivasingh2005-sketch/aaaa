@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ThumbsUp, MessageSquare, Trash2, Smile, Edit2, Share2 } from 'lucide-react';
+import { ThumbsUp, MessageSquare, Trash2, Smile, Edit2, Share2, Linkedin } from 'lucide-react';
 import EmojiPicker from 'emoji-picker-react';
 import './IdeaFeed.css';
 
@@ -94,9 +94,20 @@ const IdeaCard = ({ idea, onDelete, onEdit, onLike, onComment, currentUser }) =>
           <button className="stat-btn" onClick={() => setShowComments(!showComments)}>
             <MessageSquare size={14} /> {idea.commentsList?.length || idea.comments || 0}
           </button>
-          <button className="stat-btn" onClick={handleShare} title="Share Idea">
+          <button className="stat-btn" onClick={handleShare} title="Copy Link to Clipboard">
             <Share2 size={14} />
           </button>
+          
+          <a 
+            href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.origin + '?idea=' + idea.id)}&title=${encodeURIComponent(idea.title)}&summary=${encodeURIComponent(idea.description)}`}
+            target="_blank" 
+            rel="noreferrer" 
+            className="stat-btn share-linkedin"
+            title="Share on LinkedIn"
+            style={{ color: '#0077b5' }}
+          >
+            <Linkedin size={14} />
+          </a>
         </div>
       </div>
 
