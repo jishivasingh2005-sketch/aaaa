@@ -99,6 +99,17 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const resetPassword = async (email, newPassword) => {
+    const res = await fetch(`${API_URL}/auth/reset-password`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, newPassword })
+    });
+    const data = await res.json();
+    if (res.ok) return data;
+    else throw data;
+  };
+
   const logout = () => {
     localStorage.removeItem('socho_session');
     setCurrentUser(null);
@@ -106,7 +117,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ currentUser, signInWithGoogle, loginWithEmail, signUpWithEmail, logout, updateUserProfile, totalUsers }}>
+    <AuthContext.Provider value={{ currentUser, signInWithGoogle, loginWithEmail, signUpWithEmail, logout, updateUserProfile, resetPassword, totalUsers }}>
       {!loading && children}
     </AuthContext.Provider>
   );

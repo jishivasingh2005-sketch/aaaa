@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcryptjs');
 const User = require('../models/User');
+
+const ADMIN_EMAIL = 'jishivasingh2005@gmail.com';
 
 // @route   POST /api/auth/register
 router.post('/register', async (req, res) => {
@@ -10,11 +13,15 @@ router.post('/register', async (req, res) => {
     if (user) return res.status(400).json({ error: 'auth/email-already-in-use' });
     if (!password || password.length < 6) return res.status(400).json({ error: 'auth/weak-password' });
 
+    // Hash password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
     user = new User({
       uid: 'email-' + Date.now(),
       displayName: name || email.split('@')[0],
       email,
-      password // Plain for simple mock, typically bcrypt
+      password: hashedPassword
     });
 
     await user.save();
@@ -28,10 +35,31 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
   try {
-    const user = await User.findOne({ email, password });
-    if (!user) return res.status(400).json({ error: 'auth/wrong-password' });
+    const user = await User.findOne({ email });
+    if (!user) return res.status(400).json({ error: 'auth/user-not-found' });
+    
+    // Check password
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) return res.status(400).json({ error: 'auth/wrong-password' });
     
     res.json({ user });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// @route   POST /api/auth/reset-password
+router.post('/reset-password', async (req, res) => {
+  const { email, newPassword } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ error: 'User not found' });
+
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(newPassword, salt);
+    
+    await user.save();
+    res.json({ message: 'Password reset successful' });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -81,6 +109,10 @@ router.get('/users/count', async (req, res) => {
 
 // @route   GET /api/auth/users (Admin only)
 router.get('/users', async (req, res) => {
+  const adminEmail = req.headers['admin-email'];
+  if (adminEmail !== ADMIN_EMAIL) {
+    return res.status(403).json({ error: 'Forbidden' });
+  }
   try {
     const users = await User.find().select('-password');
     res.json(users);
@@ -91,6 +123,10 @@ router.get('/users', async (req, res) => {
 
 // @route   DELETE /api/auth/users/:uid (Admin only)
 router.delete('/users/:uid', async (req, res) => {
+  const adminEmail = req.headers['admin-email'];
+  if (adminEmail !== ADMIN_EMAIL) {
+    return res.status(403).json({ error: 'Forbidden' });
+  }
   try {
     const deletedUser = await User.findOneAndDelete({ uid: req.params.uid });
     if (!deletedUser) return res.status(404).json({ error: 'User not found' });
