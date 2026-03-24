@@ -7,7 +7,7 @@ import UserProfile from './components/UserProfile'
 import { AuthProvider, useAuth } from './contexts/AuthContext'
 import './App.css'
 
-const API_URL = 'http://127.0.0.1:5000/api';
+const API_URL = '/api';
 
 function AppContent() {
   const [showLogin, setShowLogin] = useState(false);

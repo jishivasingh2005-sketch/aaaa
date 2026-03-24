@@ -21,9 +21,16 @@ mongoose.connect(MONGO_URI, { serverSelectionTimeoutMS: 5000, family: 4 })
   .then(() => console.log('MongoDB connected successfully'))
   .catch(err => console.error('MongoDB connection error:', err));
 
+const path = require('path');
 // Routes
 app.use('/api/ideas', ideaRoutes);
 app.use('/api/auth', authRoutes);
+
+// Static Frontend Serving (for Deployment)
+app.use(express.static(path.join(__dirname, '../dist')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
+});
 
 // Health check endpoint
 app.get('/', (req, res) => res.send('IdeaSpace API Running...'));
