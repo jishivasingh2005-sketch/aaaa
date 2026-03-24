@@ -62,7 +62,7 @@ const AuthModal = ({ onClose }) => {
           <div className="logo-icon mx-auto" style={{ width: '48px', height: '48px', marginBottom: '1rem' }}>
             <User size={24} color="#818cf8" />
           </div>
-          <h2 className="text-gradient">{isLogin ? 'Welcome Back' : 'Join IdeaSpace'}</h2>
+          <h2 className="text-gradient">{isLogin ? 'Welcome Back' : 'Join Socho'}</h2>
           <p className="text-sm" style={{ marginTop: '0.5rem' }}>
             {isLogin ? 'Log in to share and explore ideas' : 'Create your free account'}
           </p>

@@ -1,4 +1,4 @@
-# Ideaspace Fullstack Deployment
+# Socho Fullstack Deployment
 
 [![Deploy to Render](https://render.com/deploy/button.svg)](https://render.com/deploy?repo=https://github.com/jishivasingh2005-sketch/aaaa)
 

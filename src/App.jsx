@@ -16,14 +16,14 @@ function AppContent() {
   const [ideas, setIdeas] = useState([]);
   const [currentView, setCurrentView] = useState('feed');
   const [searchQuery, setSearchQuery] = useState('');
-  const [theme, setTheme] = useState(localStorage.getItem('ideaspace_theme') || 'light');
+  const [theme, setTheme] = useState(localStorage.getItem('socho_theme') || 'light');
   const [dbError, setDbError] = useState(false);
   
   const { currentUser, totalUsers } = useAuth();
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('ideaspace_theme', theme);
+    localStorage.setItem('socho_theme', theme);
   }, [theme]);
   
   const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');

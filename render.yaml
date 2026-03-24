@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: ideaspace-fullstack
+    name: socho-fullstack
     env: node
     plan: free
     buildCommand: npm run build

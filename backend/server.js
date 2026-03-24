@@ -33,7 +33,7 @@ app.get('*', (req, res) => {
 });
 
 // Health check endpoint
-app.get('/', (req, res) => res.send('IdeaSpace API Running...'));
+app.get('/', (req, res) => res.send('Socho API Running...'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

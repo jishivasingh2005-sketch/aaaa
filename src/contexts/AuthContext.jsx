@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const session = localStorage.getItem('ideaspace_session');
+    const session = localStorage.getItem('socho_session');
     if (session) {
       setCurrentUser(JSON.parse(session));
     }
@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }) => {
     });
     const data = await res.json();
     if (res.ok) {
-      localStorage.setItem('ideaspace_session', JSON.stringify(data.user));
+      localStorage.setItem('socho_session', JSON.stringify(data.user));
       setCurrentUser(data.user);
       return data;
     } else throw data;
@@ -59,7 +59,7 @@ export const AuthProvider = ({ children }) => {
     });
     const data = await res.json();
     if (res.ok) {
-      localStorage.setItem('ideaspace_session', JSON.stringify(data.user));
+      localStorage.setItem('socho_session', JSON.stringify(data.user));
       setCurrentUser(data.user);
       return data;
     } else {
@@ -75,7 +75,7 @@ export const AuthProvider = ({ children }) => {
     });
     const data = await res.json();
     if (res.ok) {
-      localStorage.setItem('ideaspace_session', JSON.stringify(data.user));
+      localStorage.setItem('socho_session', JSON.stringify(data.user));
       setCurrentUser(data.user);
       return data;
     } else {
@@ -91,7 +91,7 @@ export const AuthProvider = ({ children }) => {
     });
     const data = await res.json();
     if (res.ok) {
-      localStorage.setItem('ideaspace_session', JSON.stringify(data.user));
+      localStorage.setItem('socho_session', JSON.stringify(data.user));
       setCurrentUser(data.user);
       return data;
     } else {
@@ -100,7 +100,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    localStorage.removeItem('ideaspace_session');
+    localStorage.removeItem('socho_session');
     setCurrentUser(null);
     return Promise.resolve();
   };
