@@ -76,6 +76,7 @@ router.post('/:id/comment', async (req, res) => {
     
     idea.commentsList.push({
       ...comment,
+      id: 'comm-' + Date.now() + Math.random().toString(36).substr(2, 9),
       createdAt: new Date().toISOString()
     });
     idea.comments += 1;

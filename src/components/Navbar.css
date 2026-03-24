@@ -49,9 +49,24 @@
 
 /* Search Bar */
 .search-bar {
-  flex: 0 1 400px;
+  flex: 1;
+  max-width: 400px;
   position: relative;
-  margin: 0 2rem;
+  margin: 0 1rem;
+}
+
+@media (max-width: 768px) {
+  .search-bar { display: none; }
+  .logo-text { font-size: 1.25rem; }
+  .navbar-inner { padding: 0 1rem; }
+  .nav-actions { gap: 0.5rem; }
+  .user-label { display: none; }
+  .user-pill { padding: 0.35rem; margin: 0; }
+  .btn-primary { padding: 0.5rem 0.8rem; font-size: 0.85rem; }
+}
+
+@media (max-width: 480px) {
+  .logo-text { display: none; }
 }
 .search-icon {
   position: absolute;

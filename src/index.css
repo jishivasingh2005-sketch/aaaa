@@ -16,6 +16,8 @@
   --accent-gradient: linear-gradient(135deg, #6366F1 0%, #A855F7 100%);
   --accent-bg: rgba(99, 102, 241, 0.1);
   --accent-glow: rgba(99, 102, 241, 0.4);
+  --accent2: #10B981;
+  --accent3: #F59E0B;
 
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
@@ -48,6 +50,8 @@
   --accent-gradient: linear-gradient(135deg, #818CF8 0%, #C084FC 100%);
   --accent-bg: rgba(129, 140, 248, 0.15);
   --accent-glow: rgba(129, 140, 248, 0.6);
+  --accent2: #34D399;
+  --accent3: #FBBF24;
 
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.2);

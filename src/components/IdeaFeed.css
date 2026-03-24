@@ -187,8 +187,22 @@
 .empty-state h3 { font-family: var(--font-serif); font-size: 1.8rem; margin: 1.5rem 0 0.5rem; color: var(--text-h); font-weight: 700;}
 
 @media (max-width: 768px) {
-  .feed-layout { grid-template-columns: 1fr; gap: 2rem; margin-top: 1rem;}
-  .sidebar { position: relative; top: 0; }
-  .cat-list { flex-direction: row; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 0.5rem; }
-  .cat-btn { white-space: nowrap; }
+  .feed-layout { grid-template-columns: 1fr; gap: 1.5rem; margin-top: 1.5rem;}
+  .sidebar { position: relative; top: 0; margin-bottom: 0.5rem; }
+  .cat-list { 
+    flex-direction: row; 
+    overflow-x: auto; 
+    flex-wrap: nowrap; 
+    padding-bottom: 0.75rem;
+    scrollbar-width: none;
+    margin: 0 -1rem;
+    padding: 0 1rem 0.75rem;
+  }
+  .cat-list::-webkit-scrollbar { display: none; }
+  .cat-btn { white-space: nowrap; padding: 0.6rem 0.9rem; font-size: 0.85rem;}
+  .sidebar-title { display: none; }
+  .cards-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+  .idea-card { padding: 1.25rem; }
+  .card-title { font-size: 1.2rem; }
+  .card-desc { font-size: 0.95rem; }
 }

@@ -54,6 +54,13 @@
   position: relative;
 }
 
+@media (max-width: 640px) {
+  .modal-content {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+}
+
 /* User Profile overrides */
 .profile-header {
   background: var(--surface);
@@ -71,4 +78,30 @@
   top: 0; left: 0; right: 0; height: 120px;
   background: var(--accent-gradient);
   opacity: 0.15;
+}
+
+/* Responsive tweaks for App layouts */
+@media (max-width: 992px) {
+  .hero-section {
+    flex-direction: column;
+    text-align: center;
+    gap: 3rem;
+  }
+  .hero-text h1 {
+    font-size: 2.8rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-text h1 {
+    font-size: 2.2rem !important;
+  }
+  .hero-text p {
+    font-size: 1rem !important;
+    text-align: center;
+    margin: 0 auto;
+  }
+  .container {
+    padding: 0 1rem;
+  }
 }

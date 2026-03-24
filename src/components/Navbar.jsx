@@ -1,9 +1,9 @@
 import React from 'react';
-import { Lightbulb, Search, Plus, LogOut, Sun, Moon } from 'lucide-react';
+import { Lightbulb, Search, Plus, LogOut, Sun, Moon, ShieldCheck } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import './Navbar.css';
 
-const Navbar = ({ onPostClick, onLoginClick, onSearch, onViewProfile, onHomeClick, currentView, theme, toggleTheme }) => {
+const Navbar = ({ onPostClick, onLoginClick, onSearch, onViewProfile, onAdminClick, onHomeClick, currentView, theme, toggleTheme }) => {
   const { currentUser, logout } = useAuth();
 
   const initials = (name) => name ? name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2) : '??';
@@ -48,6 +48,21 @@ const Navbar = ({ onPostClick, onLoginClick, onSearch, onViewProfile, onHomeClic
               <button className="btn btn-primary" onClick={onPostClick}>
                 <Plus size={16} /> Post Idea
               </button>
+
+              {currentUser?.email === 'jishivasingh2005@gmail.com' && (
+                <button 
+                  className="btn btn-outline" 
+                   onClick={onAdminClick} 
+                   style={{ 
+                     borderColor: 'var(--accent)', 
+                     backgroundColor: currentView === 'admin' ? 'var(--accent)' : 'transparent',
+                     color: currentView === 'admin' ? '#fff' : 'var(--accent)',
+                     fontWeight: '700'
+                   }}
+                >
+                  <ShieldCheck size={16} /> Admin Panel
+                </button>
+              )}
               <div 
                 className="user-pill" 
                 title="Your Dashboard" 

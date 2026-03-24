@@ -79,4 +79,25 @@ router.get('/users/count', async (req, res) => {
   }
 });
 
+// @route   GET /api/auth/users (Admin only)
+router.get('/users', async (req, res) => {
+  try {
+    const users = await User.find().select('-password');
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// @route   DELETE /api/auth/users/:uid (Admin only)
+router.delete('/users/:uid', async (req, res) => {
+  try {
+    const deletedUser = await User.findOneAndDelete({ uid: req.params.uid });
+    if (!deletedUser) return res.status(404).json({ error: 'User not found' });
+    res.json({ message: 'User deleted successfully' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 module.exports = router;

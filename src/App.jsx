@@ -4,6 +4,7 @@ import IdeaFeed from './components/IdeaFeed'
 import AuthModal from './components/AuthModal'
 import PostIdeaModal from './components/PostIdeaModal'
 import UserProfile from './components/UserProfile'
+import AdminDashboard from './components/AdminDashboard'
 import { AuthProvider, useAuth } from './contexts/AuthContext'
 import './App.css'
 
@@ -138,6 +139,7 @@ function AppContent() {
   };
 
   const handleViewProfile = () => currentUser ? setCurrentView('profile') : setShowLogin(true);
+  const handleViewAdmin = () => (currentUser?.email === 'jishivasingh2005@gmail.com') ? setCurrentView('admin') : setCurrentView('feed');
 
   return (
     <div className="app-container relative">
@@ -154,6 +156,7 @@ function AppContent() {
         onPostClick={handlePostClick}
         onSearch={setSearchQuery}
         onViewProfile={handleViewProfile}
+        onAdminClick={handleViewAdmin}
         onHomeClick={() => { setCurrentView('feed'); setSearchQuery(''); }}
         currentView={currentView}
         theme={theme}
@@ -164,8 +167,8 @@ function AppContent() {
         <main className="container mt-4 anim d1" style={{ paddingTop: '3rem', paddingBottom: '5rem' }}>
           
           {!searchQuery && (
-            <div className="flex justify-between items-center" style={{ marginBottom: '3rem' }}>
-              <div>
+            <div className="hero-section flex justify-between items-center" style={{ marginBottom: '3rem' }}>
+              <div className="hero-text">
                 <h1 className="serif" style={{ fontSize: '3.5rem', marginBottom: '1rem', lineHeight: '1.1', color: 'var(--text)' }}>
                   Got a wild idea? <br/>
                   <span style={{ color: 'var(--accent)', fontStyle: 'italic' }}>Let's hear it.</span>
@@ -175,7 +178,7 @@ function AppContent() {
                 </p>
               </div>
               
-              <div className="card" style={{ padding: '1.5rem 2rem', borderRadius: '16px', textAlign: 'center', backgroundColor: 'var(--surface)' }}>
+              <div className="hero-stats card anim d2" style={{ padding: '1.5rem 2rem', borderRadius: '16px', textAlign: 'center', backgroundColor: 'var(--surface)' }}>
                 <p className="sans" style={{ fontSize: '0.75rem', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Community</p>
                 <h2 className="serif" style={{ fontSize: '2.8rem', margin: '0.5rem 0', color: 'var(--text)' }}>{ideas.length > 0 ? ideas.length + 3 : 0}</h2>
                 <p className="sans" style={{ fontSize: '0.85rem', color: 'var(--muted)' }}>minds sharing here</p>
@@ -192,6 +195,10 @@ function AppContent() {
             searchQuery={searchQuery}
             currentUser={currentUser}
           />
+        </main>
+      ) : currentView === 'admin' ? (
+        <main className="container mt-4" style={{ paddingTop: '2rem', paddingBottom: '5rem' }}>
+          <AdminDashboard onBack={() => setCurrentView('feed')} />
         </main>
       ) : (
         <main className="container mt-4" style={{ paddingTop: '2rem', paddingBottom: '5rem' }}>

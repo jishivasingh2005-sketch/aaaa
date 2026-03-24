@@ -1,7 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 const ideaRoutes = require('./routes/ideas');
 const authRoutes = require('./routes/auth');
@@ -21,19 +22,17 @@ mongoose.connect(MONGO_URI, { serverSelectionTimeoutMS: 5000, family: 4 })
   .then(() => console.log('MongoDB connected successfully'))
   .catch(err => console.error('MongoDB connection error:', err));
 
-const path = require('path');
 // Routes
 app.use('/api/ideas', ideaRoutes);
 app.use('/api/auth', authRoutes);
 
 // Static Frontend Serving (for Deployment)
 app.use(express.static(path.join(__dirname, '../dist')));
-app.get('*', (req, res) => {
+
+// Catch-all route for frontend (Saves the single page app navigation)
+app.get(/.*/, (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
-
-// Health check endpoint
-app.get('/', (req, res) => res.send('Socho API Running...'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
